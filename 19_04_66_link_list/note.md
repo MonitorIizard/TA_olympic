@@ -1,3 +1,4 @@
 ### linked list 
 
-wtf is linked list
+pointer ข้อที่ 7 
+- จะต้องเเก้ให้คำตอบอยู่บรรทัดเดียว

@@ -29,7 +29,7 @@ void insertAfter(Node** root ,int value, int index) {
     } else {
         Node* curr = *root;
         
-        while(i < index && curr != NULL) {
+        while(i < index - 1 && curr != NULL) {
             curr = curr -> next;
             i++;
         }
@@ -107,7 +107,7 @@ int main () {
     Node* root = malloc(sizeof(Node));
 
     int index = 0;
-    int round = 1;
+    int round = 0;
 
     scanf("%d", &round);
 
@@ -130,12 +130,6 @@ int main () {
             removeElement(&root, index);
         }
     }
-    // printf("_%d_", index);
-    // insertBeginnig(&root, 5);
-    // insertBeginnig(&root, 4);
-    // insertBeginnig(&root, 3);
-    //removeElement(&root, index);
-    // printf("%d", index);
     printAllElement(&root);
 
     deAllocation(&root);
