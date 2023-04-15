@@ -1,0 +1,14 @@
+---------------------------------- SET 1  --------------------
+Average Shortest path - Floyd Warshall
+Ceremony  - MST Kruskal
+Computer Network  - Dijkstra  
+--------------------------------- SET 2 ---------------------
+Villages -   Partial MST with Kruskal 
+Parpoen  -   Floyd-warshall / Dijkstra  [Choose max of min weight]
+Hospitel  -  Floyd (Dijkstra) 
+
+
+
+
+
+

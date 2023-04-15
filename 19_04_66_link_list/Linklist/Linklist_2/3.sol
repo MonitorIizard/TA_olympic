@@ -1,0 +1,15 @@
+NO
+2
+3
+6
+0
+NO
+NO
+-20
+-10
+NO
+NO
+NO
+NO
+NO
+NO
