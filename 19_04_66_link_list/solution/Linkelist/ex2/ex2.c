@@ -15,25 +15,24 @@ int findLength(Node **root) {
         length++;
         curr = curr -> next;
     }
-    if (!strcmp((*root) -> x, "")) {
+    if (curr == NULL) {
         return length = 0;
     }
     length++;
-    //printf("length out from findLength = %d\n", length);
     return length;
 }
 
 int cleanIndex(int index, int length) {
     // printf("index_in = %d\n", index);
     // printf("length in = %d\n", length);
-     if (index > length) {
+    if (index > length) {
             index = length;
     }
 
     if (index < 0) {
         index = 0;
     }
-    // printf("index = %d\n", index);
+    //printf("index = %d\n", index);
     return index;
 }
 
@@ -43,20 +42,33 @@ void insertBefore(Node** root, char* value, int index) {
         exit(1);
     }
 
+    strcpy(next_node -> x, value);
+
     Node *curr = *root;
+
+    if (curr == NULL) {
+        strcpy((*root) -> x, next_node -> x);
+        (*root) -> next = NULL;
+        printf("hell");
+        return;
+    }
     
     int length = 0;
     length = findLength(&(*root));
 
-    index = cleanIndex(index, length);
-
-    strcpy(next_node -> x, value);
-
-    if (!strcmp((*root) -> x, "")) {
-        strcpy((*root) -> x, next_node -> x);
-        (*root) -> next = NULL;
+    if (index >= length) {
         return;
     }
+
+    if (index < 0) {
+        return;
+    }
+
+    // if (!strcmp((*root) -> x, "")) {
+    //     strcpy((*root) -> x, next_node -> x);
+    //     (*root) -> next = NULL;
+    //     return;
+    // }
 
     if (index == 0) {
         next_node -> next = (*root);
@@ -80,18 +92,29 @@ void insertBefore(Node** root, char* value, int index) {
 void removeElementSpecificIndex (Node** root, int index) {
 
     Node *curr = *root;
+    if (*root == NULL) {
+        printf("NULL");
+        return;
+    }
     Node *toRemove;
     int i = 0;
     int length = 0;
     length = findLength(&(*root));
 
-    index = cleanIndex(index, length);
-
     //printf("index = %d\n", index);
+    if (index < 0 || index >= length) {
+        return;
+    }
+
+    if (length == 1) {
+        return;
+    }
+
+    //printf("%d", length);
 
     if (index == 0) {
-        toRemove = curr;
-        curr = curr -> next;
+        toRemove = *root;
+        *root = (*root) -> next;
         free(toRemove);
     } else {
         while (i <= index) {
@@ -109,6 +132,12 @@ void removeElementSpecificIndex (Node** root, int index) {
 
 void printBeforeTarget(Node** root, char* input) {
     Node *curr = *root;
+    if (! strcmp((*root) -> x, input)) {
+        
+        printf("NO\n");
+        return;
+    }
+
     while (curr -> next != NULL) {
         if (! strcmp(curr -> next -> x, input)) {
             printf("%s\n", curr -> x);
@@ -153,10 +182,10 @@ void printAllElement(Node** root) {
     Node* curr = *root;
     //printf("%d", curr -> x);
     while(curr -> next != NULL) {
-        printf("%s ", curr -> x);
+        printf("_%s -> ", curr -> x);
         curr = curr -> next;
     }
-    printf("%s ", curr -> x);
+    printf("%s_\n", curr -> x);
 }
 
 void deAllocation(Node** root) { 
@@ -202,14 +231,40 @@ int main () {
             printTarget(&root, input);
         }
 
+        if (command == 'f') {
+            printAllElement(&root);
+        }
+
         if (command == 'a') {
             scanf(" %s", input);
             printAfterTarget(&root, input);
         }
+
+        if (command == 'l') {
+            int length = findLength(&root);
+            printf("length = %d\n", length);
+        }
     }
 
-    
     //printAllElement(&root);
     deAllocation(&root);
     return 0;
 }
+
+//3 2 1 3 3 
+// r- 2|| 3 2 3 3 
+// r- 2|| 3 2 3 
+// b 2 || 3
+// p 2 || 2
+// a 2 || 3
+// b 4 || NO
+// p 4 || NO
+// a 4 || NO
+// b 3 || NO
+// P 3 || 3
+// a 3 || 2
+// r 3 || 3 2 3 
+// r 0 ||2 3
+// b 3 || 2
+// p 3 || 3
+// a 3 || NO
